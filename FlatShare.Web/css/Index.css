@@ -39,3 +39,11 @@
     margin: 0;
     float: right;
 }
+
+.modal-body label {
+    width:100%;
+}
+.modal-body .form-control {
+    width:50%;
+    display:inline-block;
+}

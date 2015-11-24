@@ -4,3 +4,9 @@ E:\Test\FlatShare\FlatShare.Web\bin\FlatShare.Web.pdb
 E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.csprojResolveAssemblyReference.cache
 E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.dll
 E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.pdb
+C:\Asp.net\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll.config
+C:\Asp.net\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll
+C:\Asp.net\FlatShare\FlatShare.Web\bin\FlatShare.Web.pdb
+C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.csprojResolveAssemblyReference.cache
+C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.dll
+C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.pdb
