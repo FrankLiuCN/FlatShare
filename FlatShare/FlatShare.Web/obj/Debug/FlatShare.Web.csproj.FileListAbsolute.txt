@@ -1,0 +1,6 @@
+E:\Test\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll.config
+E:\Test\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll
+E:\Test\FlatShare\FlatShare.Web\bin\FlatShare.Web.pdb
+E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.csprojResolveAssemblyReference.cache
+E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.dll
+E:\Test\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.pdb

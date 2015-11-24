@@ -1,0 +1,8 @@
+﻿.login-panel {
+    width:360px;
+    position:absolute;
+    top:50%;
+    margin-top:-122px; 
+    left:50%;
+    margin-left:-180px;
+}

@@ -1,0 +1,41 @@
+﻿.nav-container {
+    margin: 0 auto;
+    width: 1024px;
+}
+
+.navbar-header a {
+    padding-left: 0;
+}
+
+.page-wrapper {
+    width: 1024px;
+    margin: 61px auto;
+}
+
+.botton-container {
+    padding: 10px 0;
+    float: left;
+}
+
+.search-container {
+    padding: 10px 0;
+    float: right;
+    width: 200px;
+    display: inline-block;
+    text-align: right;
+}
+
+
+    .search-container .form-control {
+        display: inline-block;
+        width: 150px;
+    }
+
+.pagination-container {
+    height: 35px;
+}
+
+.pagination-costom {
+    margin: 0;
+    float: right;
+}
