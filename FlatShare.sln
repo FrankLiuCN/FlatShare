@@ -5,6 +5,8 @@ VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatShare.Web", "FlatShare.Web\FlatShare.Web.csproj", "{B3D7A6BA-2A57-4492-B451-8922636CF9A1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatShare.API", "FlatShare.API\FlatShare.API.csproj", "{E6763ABC-C054-466E-8C76-2B33EE80EEF5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{B3D7A6BA-2A57-4492-B451-8922636CF9A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3D7A6BA-2A57-4492-B451-8922636CF9A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3D7A6BA-2A57-4492-B451-8922636CF9A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6763ABC-C054-466E-8C76-2B33EE80EEF5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6763ABC-C054-466E-8C76-2B33EE80EEF5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6763ABC-C054-466E-8C76-2B33EE80EEF5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6763ABC-C054-466E-8C76-2B33EE80EEF5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
