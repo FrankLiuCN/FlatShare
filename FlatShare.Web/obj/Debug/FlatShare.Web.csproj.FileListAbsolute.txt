@@ -10,3 +10,9 @@ C:\Asp.net\FlatShare\FlatShare.Web\bin\FlatShare.Web.pdb
 C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.csprojResolveAssemblyReference.cache
 C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.dll
 C:\Asp.net\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.pdb
+E:\GitProjects\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll.config
+E:\GitProjects\FlatShare\FlatShare.Web\bin\FlatShare.Web.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\FlatShare.Web.pdb
+E:\GitProjects\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.csprojResolveAssemblyReference.cache
+E:\GitProjects\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.dll
+E:\GitProjects\FlatShare\FlatShare.Web\obj\Debug\FlatShare.Web.pdb
