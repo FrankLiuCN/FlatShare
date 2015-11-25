@@ -79,12 +79,13 @@
     <Content Include="bootstrap\js\bootstrap.js" />
     <Content Include="bootstrap\js\bootstrap.min.js" />
     <Content Include="bootstrap\js\npm.js" />
-    <Content Include="css\bootstrap-datetimepicker.min.css" />
     <Content Include="css\Index.css" />
     <Content Include="css\Login.css" />
+    <Content Include="Datepicker\bootstrap-datepicker.js" />
+    <Content Include="Datepicker\datepicker.css" />
+    <Content Include="Item.html" />
     <Content Include="Index.html" />
     <Content Include="Login.html" />
-    <Content Include="scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.ar.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.bg.js" />
