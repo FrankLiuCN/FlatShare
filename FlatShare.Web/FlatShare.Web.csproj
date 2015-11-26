@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="app\app.js" />
+    <Content Include="app\controller\payItemController.js" />
+    <Content Include="app\services\payItemService.js" />
     <Content Include="bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="bootstrap\css\bootstrap.css.map" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.eot" />
@@ -86,6 +89,7 @@
     <Content Include="Item.html" />
     <Content Include="Index.html" />
     <Content Include="Login.html" />
+    <Content Include="scripts\angular.min.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.ar.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.bg.js" />

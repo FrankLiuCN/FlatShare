@@ -9,6 +9,10 @@
     <script src="bootstrap/js/bootstrap.min.js"></script>
     <script src="scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="Datepicker/bootstrap-datepicker.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/services/payItemService.js"></script>
+    <script src="app/controller/payItemController.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.datepicker').datepicker();
@@ -16,7 +20,7 @@
         });
     </script>
 </head>
-<body>
+<body data-ng-app="FlatShareApp">
     <div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="nav-container">
@@ -53,7 +57,7 @@
         </nav>
     </div>
     <div style="clear:both"></div>
-    <div class="page-wrapper">
+    <div class="page-wrapper" data-ng-controller="payItemController">
         <div class="panel panel-default">
             <div class="panel-heading">支出项 信息</div>
             <div class="panel-body">
@@ -75,19 +79,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd gradeX">
-                            <td>1</td>
-                            <td>煤气费</td>
-                            <td>2015-11-25</td>
-                        </tr>
-                        <tr class="odd gradeX">
-                            <td>2</td>
-                            <td>网费</td>
-                            <td>2015-11-25</td>
-                        </tr>
-                        <tr class="odd gradeX">
-                            <td>3</td>
-                            <td>水电费</td>
+                        <tr class="odd gradeX" ng-repeat="item in PayItems">
+                            <td>{{item.RowID}}</td>
+                            <td>{{item.itemName}}</td>
                             <td>2015-11-25</td>
                         </tr>
                     </tbody>
@@ -148,26 +142,26 @@
                             </label>
                         </div>
                     </div>
-                        <div class="row">
-                            <div class="col-md-11">
-                                <div class="btn-group" data-toggle="buttons">
-                                    <span>平摊人员:&nbsp;</span>
+                    <div class="row">
+                        <div class="col-md-11">
+                            <div class="btn-group" data-toggle="buttons">
+                                <span>平摊人员:&nbsp;</span>
 
 
-                                    <label class="btn btn-default">
-                                        <input type="checkbox"> 选项 1
-                                    </label>
-                                    <label class="btn btn-default">
-                                        <input type="checkbox"> 选项 2
-                                    </label>
-                                    <label class="btn btn-default">
-                                        <input type="checkbox"> 选项 3
-                                    </label>
-                                </div>
+                                <label class="btn btn-default">
+                                    <input type="checkbox"> 选项 1
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="checkbox"> 选项 2
+                                </label>
+                                <label class="btn btn-default">
+                                    <input type="checkbox"> 选项 3
+                                </label>
                             </div>
                         </div>
                     </div>
-                
+                </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                     <button type="button" class="btn btn-primary">保存</button>
