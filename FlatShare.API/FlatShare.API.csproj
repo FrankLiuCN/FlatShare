@@ -81,6 +81,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="Models\FlatShareDBModel.edmx.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -135,6 +136,7 @@
       <DependentUpon>FlatShareDBModel.edmx</DependentUpon>
       <LastGenOutput>FlatShareDBModel.cs</LastGenOutput>
     </Content>
+    <None Include="Properties\PublishProfiles\FlatShareApiConfig.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

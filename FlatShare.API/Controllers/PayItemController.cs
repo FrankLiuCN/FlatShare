@@ -77,7 +77,7 @@ namespace FlatShare.API.Controllers
             {
                 return BadRequest(ModelState);
             }
-
+            payitem.LastUpdatedDate = DateTime.Now;
             db.PayItem.Add(payitem);
             db.SaveChanges();
 

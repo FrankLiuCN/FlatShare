@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FlatShareModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="FlatShareModelStoreContainer">
+    <EntitySet Name="Outlay" EntityType="FlatShareModel.Store.Outlay" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="PayItem" EntityType="FlatShareModel.Store.PayItem" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="UserAccount" EntityType="FlatShareModel.Store.UserAccount" store:Type="Tables" Schema="dbo" />
+  </EntityContainer>
+  <EntityType Name="Outlay">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PayMoney" Type="decimal" Nullable="false" Precision="18" Scale="2" />
+    <Property Name="PayItemID" Type="int" Nullable="false" />
+    <Property Name="PayDate" Type="datetime" Nullable="false" />
+    <Property Name="ShareID" Type="nvarchar" Nullable="false" MaxLength="250" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" Nullable="true" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayItem">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" Nullable="false" MaxLength="100" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" Nullable="true" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="true" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="true" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="10" />
+    <Property Name="LoginName" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="20" />
+    <Property Name="Telephone" Type="nvarchar" Nullable="true" MaxLength="20" />
+    <Property Name="Remark" Type="nvarchar" Nullable="true" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" Nullable="true" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+</Schema>
