@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FlatShareModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Outlay">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PayMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PayItemID" Type="int" Nullable="false" />
+    <Property Name="PayDate" Type="date" Nullable="false" />
+    <Property Name="ShareID" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="PayItem">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ItemName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" />
+    <Property Name="LastUpdatedBy" Type="int" />
+    <Property Name="LastUpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="UserAccount">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="10" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="Telephone" Type="nvarchar" MaxLength="20" />
+    <Property Name="Remark" Type="nvarchar" MaxLength="250" />
+    <Property Name="LogicalDelete" Type="bit" />
+    <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
+    <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="FlatShareModelStoreContainer">
+    <EntitySet Name="Outlay" EntityType="Self.Outlay" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayItem" EntityType="Self.PayItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

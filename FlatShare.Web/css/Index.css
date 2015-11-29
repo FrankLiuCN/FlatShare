@@ -67,3 +67,7 @@
     width: 80px;
     display: inline-block;
 }
+
+.highlight{
+    background-color: red
+}

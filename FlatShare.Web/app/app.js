@@ -1,2 +1,12 @@
 ﻿var app = angular.module('FlatShareApp', []);
-var serviceBase = 'http://localhost:5050/api/';
+
+var serviceBase = '/api/';
+
+function webRoot(url) {
+    if (url.substring(0, 1) === "/") {
+        return serviceBase + url.substring(1);
+    }
+    else {
+        return serviceBase + url;
+    }
+}

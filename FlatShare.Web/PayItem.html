@@ -4,23 +4,31 @@
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/Index.css" rel="stylesheet" />
+    <link href="css/payItem.css" rel="stylesheet" />
     <link href="Datepicker/datepicker.css" rel="stylesheet" />
     <script src="scripts/jquery-1.11.3.min.js"></script>
     <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="scripts/bootstrap-datetimepicker.min.js"></script>
     <script src="Datepicker/bootstrap-datepicker.js"></script>
     <script src="scripts/angular.min.js"></script>
     <script src="app/app.js"></script>
+    <script src="app/listpager.js"></script>
+    <script src="app/grid-helpers.js"></script>
+    <script src="app/data-service.js"></script>
     <script src="app/services/payItemService.js"></script>
     <script src="app/controller/payItemController.js"></script>
     <script type="text/javascript">
         $(function () {
             $('.datepicker').datepicker();
             $('.datepicker').css("z-index", "9999");
+            $('table').on('click', 'tr', function (event) {
+                $('.click-highlight').removeClass('click-highlight');
+                $(this).addClass("click-highlight");
+            });
+
         });
     </script>
 </head>
-<body ng-app="FlatShareApp">
+<body ng-app="FlatShareApp" ng-controller="payItemController">
     <div>
         <nav class="navbar navbar-default navbar-fixed-top">
             <div class="nav-container">
@@ -57,20 +65,20 @@
         </nav>
     </div>
     <div style="clear:both"></div>
-    <div class="page-wrapper" ng-controller="payItemController">
+    <div class="page-wrapper">
         <div class="panel panel-default">
             <div class="panel-heading">支出项 信息</div>
             <div class="panel-body">
                 <div class="botton-container">
-                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#largeModal">添加</button>
-                    <button type="button" class="btn btn-default">编辑</button>
-                    <button type="button" class="btn btn-default">删除</button>
+                    <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddPayItem()" data-target="#addOrEditModal">添加</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" data-toggle="modal" data-target="#addOrEditModal">编辑</button>
+                    <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" ng-click="deletePayItem()">删除</button>
                 </div>
                 <div class="search-container">
                     <label>搜索: <input class="form-control"></label>
 
                 </div>
-                <table class="table table-striped table-bordered table-hover">
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <th>#</th>
@@ -80,7 +88,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="odd gradeX" ng-repeat="item in PayItems">
+                        <tr class="odd gradeX {{}}" ng-repeat="item in PayItems" ng-click="setPayItem()">
                             <td>{{item.RowID}}</td>
                             <td>{{item.ItemName}}</td>
                             <td>{{item.Remark}}</td>
@@ -89,13 +97,14 @@
                     </tbody>
                 </table>
                 <div class="pagination-container">
+                    <ul class="pagination pagination-costom" ng-if="totalCount > itemsPerPage">
+                        <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i></a></li>
+                        <li ng-repeat="n in totalPage" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
+                        <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i></a></li>
+                    </ul>
                     <ul class="pagination pagination-costom">
                         <li><a href="#">&laquo;</a></li>
-                        <li><a href="#">1</a></li>
-                        <li><a href="#">2</a></li>
-                        <li><a href="#">3</a></li>
-                        <li><a href="#">4</a></li>
-                        <li><a href="#">5</a></li>
+                        <li ng-repeat="n in totalPage"><a href="#">{{n}}</a></li>
                         <li><a href="#">&raquo;</a></li>
                     </ul>
                 </div>
@@ -104,7 +113,7 @@
 
     </div>
 
-    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true" ng-controller="payItemController">
+    <div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -135,7 +144,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" ng-click="savePayItem()">保存</button>
+                    <button type="button" class="btn btn-primary" ng-click="saveOrEditPayItem()">保存</button>
                 </div>
             </div>
         </div>

@@ -19,14 +19,14 @@ namespace FlatShare.API.Controllers
         // GET api/PayItem
         public IQueryable<PayItem> GetPayItem()
         {
-            return db.PayItem;
+            return db.PayItem.Where(p => p.LogicalDelete != true);
         }
 
         // GET api/PayItem/5
         [ResponseType(typeof(PayItem))]
         public IHttpActionResult GetPayItem(int id)
         {
-            PayItem payitem = db.PayItem.Find(id);
+            PayItem payitem = db.PayItem.Where(p => p.RowID == id && p.LogicalDelete != true).SingleOrDefault();
             if (payitem == null)
             {
                 return NotFound();
@@ -47,7 +47,7 @@ namespace FlatShare.API.Controllers
             {
                 return BadRequest();
             }
-
+            payitem.LastUpdatedDate = DateTime.Now;
             db.Entry(payitem).State = EntityState.Modified;
 
             try
@@ -93,8 +93,9 @@ namespace FlatShare.API.Controllers
             {
                 return NotFound();
             }
-
-            db.PayItem.Remove(payitem);
+            payitem.LastUpdatedDate = DateTime.Now;
+            payitem.LogicalDelete = true;
+            db.PayItem.Add(payitem);
             db.SaveChanges();
 
             return Ok(payitem);
