@@ -72,6 +72,8 @@
     };
 
     $scope.clickAddPayItem = function () {
+        $('.click-highlight').removeClass('click-highlight');
+        $scope.isSelectedPayItem = false;
         $scope.PayItem = {
             RowID: '',
             ItemName: '',
