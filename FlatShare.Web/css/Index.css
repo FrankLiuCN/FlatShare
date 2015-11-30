@@ -40,6 +40,10 @@
     float: right;
 }
 
+    .pagination-costom li {
+        cursor:pointer;
+    }
+
 .modal-body .row {
     margin: 15px 0;
 }

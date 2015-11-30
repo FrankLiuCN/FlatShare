@@ -2,7 +2,7 @@
 
     $scope.isSelectedPayItem = false;
     $scope.totalCount = 0;
-    $scope.itemsPerPage = 1;
+    $scope.itemsPerPage = 10;
     $scope.PayItems = [];
     $scope.PayItem = {
         RowID: '',
@@ -15,7 +15,9 @@
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
-            gridInit($scope, $filter)
+            $scope.totalPage = Math.floor(($scope.totalCount + $scope.itemsPerPage - 1) / $scope.itemsPerPage);
+            $scope.currentPage = 0;
+            gridInit($scope)
         })
         .error(function (data) {
             alert(data);
@@ -25,11 +27,13 @@
 
 
     $scope.getItems = function (take, skip) {
-        dataService.getItems('PayItem', { take: take, skip: skip })
+        dataService.getItems('PayItem', { take: take, skip: skip, filter: $scope.filter })
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
             $scope.currentPage = skip;
+            $scope.totalPage = Math.floor(($scope.totalCount + $scope.itemsPerPage - 1) / $scope.itemsPerPage);
+            $scope.calculateTotalPage();
         })
         .error(function (data) {
             alert(data);

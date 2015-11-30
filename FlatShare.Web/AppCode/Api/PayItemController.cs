@@ -17,13 +17,19 @@ namespace FlatShare.Web.AppCode.Api
         private FlatShareEntities db = new FlatShareEntities();
 
         // GET api/PayItem
-        public IHttpActionResult GetPayItem(int take = 10, int skip = 0)
+        public IHttpActionResult GetPayItem(int take = 10, int skip = 0, string filter = "")
         {
-            IQueryable<PayItem> items = db.PayItem.Where(p => p.LogicalDelete != true).OrderBy(p => p.RowID).Skip(skip * take).Take(take);
-            int total = db.PayItem.Count();
-            var result = new {
+            if (filter == null)
+                filter = "";
+            IQueryable<PayItem> items = db.PayItem.Where(p => p.LogicalDelete != true &&
+                (p.ItemName.Contains(filter) || p.Remark.Contains(filter)))
+                .OrderBy(p => p.RowID).Skip(skip * take).Take(take);
+            int total = db.PayItem.Where(p => p.LogicalDelete != true &&
+                (p.ItemName.Contains(filter) || p.Remark.Contains(filter))).Count();
+            var result = new
+            {
                 total = total,
-                PayItems=items
+                PayItems = items
             };
             return Ok(result);
             //return db.PayItem.Where(p => p.LogicalDelete != true).OrderBy(p => p.RowID).Skip(skip * take).Take(take);
