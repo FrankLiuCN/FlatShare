@@ -64,6 +64,10 @@
 
     scope.calculateTotalPage = function () {
         scope.totalPage = Math.floor((scope.totalCount + scope.itemsPerPage - 1) / scope.itemsPerPage);
+        scope.pagedItems = [];
+        for (var i = 0; i < scope.totalPage; i++) {
+            scope.pagedItems[i] = i;
+        }
     }
 
     scope.setPage = function () {

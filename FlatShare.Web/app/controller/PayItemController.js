@@ -2,6 +2,7 @@
 
     $scope.isSelectedPayItem = false;
     $scope.totalCount = 0;
+    $scope.itemsPerPage = 5;
     $scope.PayItems = [];
     $scope.PayItem = {
         RowID: '',
@@ -9,8 +10,8 @@
         Remark: ''
     };
 
-    $scope.load = function () {
-        dataService.getItems('PayItem', { take: 5, skip: 0 })
+    $scope.load = function (take, skip) {
+        dataService.getItems('PayItem', { take: take, skip: skip })
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
@@ -95,5 +96,5 @@
         });
     };
 
-    $scope.load();
+    $scope.load($scope.itemsPerPage, 0);
 }]);

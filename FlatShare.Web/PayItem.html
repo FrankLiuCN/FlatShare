@@ -98,15 +98,15 @@
                 </table>
                 <div class="pagination-container">
                     <ul class="pagination pagination-costom" ng-if="totalCount > itemsPerPage">
-                        <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i></a></li>
-                        <li ng-repeat="n in totalPage" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
-                        <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i></a></li>
+                        <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i>上一页</a></li>
+                        <li ng-repeat="n in pagedItems" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
+                        <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i>下一页</a></li>
                     </ul>
-                    <ul class="pagination pagination-costom">
+                    <!--<ul class="pagination pagination-costom">
                         <li><a href="#">&laquo;</a></li>
-                        <li ng-repeat="n in totalPage"><a href="#">{{n}}</a></li>
+                        <li ng-repeat="n in pagedItems"><a href="#">{{n+1}}</a></li>
                         <li><a href="#">&raquo;</a></li>
-                    </ul>
+                    </ul>-->
                 </div>
             </div>
         </div>
