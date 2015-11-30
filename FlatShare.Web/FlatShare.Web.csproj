@@ -87,7 +87,6 @@
     <Content Include="app\data-service.js" />
     <Content Include="app\grid-helpers.js" />
     <Content Include="app\listpager.js" />
-    <Content Include="app\services\payItemService.js" />
     <Content Include="bootstrap\css\bootstrap-theme.css.map" />
     <Content Include="bootstrap\css\bootstrap.css.map" />
     <Content Include="bootstrap\fonts\glyphicons-halflings-regular.eot" />

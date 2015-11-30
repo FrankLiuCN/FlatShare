@@ -2,7 +2,7 @@
 
     $scope.isSelectedPayItem = false;
     $scope.totalCount = 0;
-    $scope.itemsPerPage = 5;
+    $scope.itemsPerPage = 1;
     $scope.PayItems = [];
     $scope.PayItem = {
         RowID: '',
@@ -10,8 +10,8 @@
         Remark: ''
     };
 
-    $scope.load = function (take, skip) {
-        dataService.getItems('PayItem', { take: take, skip: skip })
+    $scope.load = function () {
+        dataService.getItems('PayItem', { take: $scope.itemsPerPage, skip: 0 })
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
@@ -21,7 +21,20 @@
             alert(data);
         });
         $scope.isSelectedPayItem = false;
+    }
 
+
+    $scope.getItems = function (take, skip) {
+        dataService.getItems('PayItem', { take: take, skip: skip })
+        .success(function (data) {
+            $scope.totalCount = data.total;
+            angular.copy(data.PayItems, $scope.PayItems);
+            $scope.currentPage = skip;
+        })
+        .error(function (data) {
+            alert(data);
+        });
+        $scope.isSelectedPayItem = false;
     }
 
 
@@ -96,5 +109,5 @@
         });
     };
 
-    $scope.load($scope.itemsPerPage, 0);
+    $scope.load();
 }]);

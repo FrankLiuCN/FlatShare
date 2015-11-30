@@ -34,3 +34,15 @@ C:\Asp.net\FlatShare\FlatShare\FlatShare.Web\bin\System.Net.Http.Formatting.xml
 C:\Asp.net\FlatShare\FlatShare\FlatShare.Web\bin\Newtonsoft.Json.xml
 C:\Asp.net\FlatShare\FlatShare\FlatShare.Web\bin\EntityFramework.SqlServer.dll
 C:\Asp.net\FlatShare\FlatShare\FlatShare.Web\bin\EntityFramework.SqlServer.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\EntityFramework.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\EntityFramework.SqlServer.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\Newtonsoft.Json.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Net.Http.Formatting.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Web.Http.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Web.Http.WebHost.dll
+E:\GitProjects\FlatShare\FlatShare.Web\bin\EntityFramework.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\EntityFramework.SqlServer.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\Newtonsoft.Json.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Net.Http.Formatting.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Web.Http.xml
+E:\GitProjects\FlatShare\FlatShare.Web\bin\System.Web.Http.WebHost.xml
