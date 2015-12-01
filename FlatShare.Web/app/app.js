@@ -1,4 +1,20 @@
-﻿var app = angular.module('FlatShareApp', []);
+﻿var app = angular.module('FlatShareApp', ['ngRoute']);
+
+app.config(function ($routeProvider) {
+
+    $routeProvider.when("/payItem", {
+        controller: "payItemController",
+        templateUrl: "/payItem.html"
+    });
+
+    $routeProvider.when("/outPay", {
+        controller: "outPayController",
+        templateUrl: "/OutPay.html"
+    });
+
+    //$routeProvider.otherwise({ redirectTo: "/payItem" });
+
+});
 
 var serviceBase = '/api/';
 

@@ -32,7 +32,17 @@ namespace FlatShare.Web.AppCode.Api
                 PayItems = items
             };
             return Ok(result);
-            //return db.PayItem.Where(p => p.LogicalDelete != true).OrderBy(p => p.RowID).Skip(skip * take).Take(take);
+        }
+        [HttpGet]
+        public IHttpActionResult GetPayItems()
+        {
+            var result = from p in db.PayItem
+                         where p.LogicalDelete != true
+                         select new { 
+                            RowId=p.RowID,
+                            ItemName=p.ItemName
+                         };
+            return Ok(result);
         }
 
         // GET api/PayItem/5

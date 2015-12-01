@@ -1,113 +1,44 @@
-﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <title></title>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="css/Index.css" rel="stylesheet" />
-    <link href="css/payItem.css" rel="stylesheet" />
-    <link href="Datepicker/datepicker.css" rel="stylesheet" />
-    <script src="scripts/jquery-1.11.3.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="Datepicker/bootstrap-datepicker.js"></script>
-    <script src="scripts/angular.min.js"></script>
-    <script src="app/app.js"></script>
-    <script src="app/listpager.js"></script>
-    <script src="app/grid-helpers.js"></script>
-    <script src="app/data-service.js"></script>
-    <script src="app/services/payItemService.js"></script>
-    <script src="app/controller/payItemController.js"></script>
-    <script type="text/javascript">
-        $(function () {
-            $('.datepicker').datepicker();
-            $('.datepicker').css("z-index", "9999");
-            $('table').on('click', 'tbody tr', function (event) {
-                $('.click-highlight').removeClass('click-highlight');
-                $(this).addClass("click-highlight");
-            });
-
-        });
-    </script>
-</head>
-<body ng-app="FlatShareApp" ng-controller="payItemController">
-    <div>
-        <nav class="navbar navbar-default navbar-fixed-top">
-            <div class="nav-container">
-                <div class="navbar-header">
-                    <a class="navbar-brand" href="index.html">Flat-Share v1.0</a>
-                </div>
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="#" title="">首页</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">支出</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">支出项</a>
-                    </li>
-                    <li>
-                        <a href="#" title="">人员管理</a>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <i class="glyphicon glyphicon-user"></i> Frank <b class="caret"></b>
-                        </a>
-                        <ul class="dropdown-menu" role="menu">
-                            <li><a href="#"><i class="glyphicon glyphicon-user"></i> 个人信息</a></li>
-                            <li class="divider"></li>
-                            <li><a href="Login.html"><i class="glyphicon glyphicon-log-out"></i> 退出系统</a></li>
-                        </ul>
-                    </li>
-                </ul>
+﻿
+<div class="page-wrapper">
+    <div class="panel panel-default">
+        <div class="panel-heading">支出项 信息</div>
+        <div class="panel-body">
+            <div class="botton-container">
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddPayItem()" data-target="#addOrEditModal">添加</button>
+                <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" data-toggle="modal" data-target="#addOrEditModal">编辑</button>
+                <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" ng-click="deletePayItem()">删除</button>
             </div>
-        </nav>
-    </div>
-    <div style="clear:both"></div>
-    <div class="page-wrapper">
-        <div class="panel panel-default">
-            <div class="panel-heading">支出项 信息</div>
-            <div class="panel-body">
-                <div class="botton-container">
-                    <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddPayItem()" data-target="#addOrEditModal">添加</button>
-                    <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" data-toggle="modal" data-target="#addOrEditModal">编辑</button>
-                    <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" ng-click="deletePayItem()">删除</button>
-                </div>
-                <div class="search-container">
-                    <label>搜索: <input class="form-control" ng-change="search()" ng-model="filter"></label>
+            <div class="search-container">
+                <label>搜索: <input class="form-control" ng-change="search()" ng-model="filter"></label>
 
-                </div>
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th style="width:50px;">#</th>
-                            <th style="width:300px;">支出名称</th>
-                            <th>备注</th>
-                            <th style="width:160px;">最后修改时间</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="odd gradeX {{}}" ng-repeat="item in PayItems" ng-click="setPayItem()">
-                            <td>{{item.RowID}}</td>
-                            <td>{{item.ItemName}}</td>
-                            <td>{{item.Remark}}</td>
-                            <td>{{item.LastUpdatedDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <div class="pagination-container">
-                    <ul class="pagination pagination-costom" ng-if="totalCount > itemsPerPage">
-                        <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i>上一页</a></li>
-                        <li ng-repeat="n in pagedItems" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
-                        <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i>下一页</a></li>
-                    </ul>
-                </div>
+            </div>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th style="width:50px;">#</th>
+                        <th style="width:300px;">支出名称</th>
+                        <th>备注</th>
+                        <th style="width:160px;">最后修改时间</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="odd gradeX {{}}" ng-repeat="item in PayItems" ng-click="setPayItem()">
+                        <td>{{item.RowID}}</td>
+                        <td>{{item.ItemName}}</td>
+                        <td>{{item.Remark}}</td>
+                        <td>{{item.LastUpdatedDate| date:'yyyy-MM-dd HH:mm:ss'}}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="pagination-container">
+                <ul class="pagination pagination-costom">
+                    <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i>上一页</a></li>
+                    <li ng-repeat="n in pagedItems" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
+                    <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i>下一页</a></li>
+                </ul>
             </div>
         </div>
-
     </div>
-
     <div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -144,5 +75,5 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+</div>
+<script src="scripts/common.js"></script>

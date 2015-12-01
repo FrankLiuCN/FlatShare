@@ -1,19 +1,14 @@
 ﻿<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" ng-app="FlatShareApp">
 <head>
     <title></title>
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link href="css/Index.css" rel="stylesheet" />
+    <link href="css/payItem.css" rel="stylesheet" />
     <link href="Datepicker/datepicker.css" rel="stylesheet" />
-    <script src="scripts/jquery-1.11.3.min.js"></script>
-    <script src="scripts/angular-route.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="Datepicker/bootstrap-datepicker.js"></script>
+
     <script type="text/javascript">
-        $(function () {
-            $('.datepicker').datepicker();
-            $('.datepicker').css("z-index", "9999");
-        });
+
     </script>
 </head>
 <body>
@@ -25,13 +20,13 @@
                 </div>
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="#" title="">首页</a>
+                        <a href="Index.html" title="首页">首页</a>
                     </li>
                     <li>
-                        <a href="#" title="">支出</a>
+                        <a href="#/outPay" title="">支出</a>
                     </li>
                     <li>
-                        <a href="#" title="">支出项</a>
+                        <a href="#/payItem" title="">支出项</a>
                     </li>
                     <li>
                         <a href="#" title="">人员管理</a>
@@ -52,10 +47,20 @@
             </div>
         </nav>
     </div>
-    <div style="clear:both"></div>
     <div class="container">
         <div data-ng-view="">
         </div>
     </div>
+    <script src="scripts/jquery-1.11.3.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="Datepicker/bootstrap-datepicker.js"></script>
+    <script src="scripts/angular.min.js"></script>
+    <script src="scripts/angular-route.min.js"></script>
+    <script src="app/app.js"></script>
+    <script src="app/listpager.js"></script>
+    <script src="app/grid-helpers.js"></script>
+    <script src="app/data-service.js"></script>
+    <script src="app/controller/payItemController.js"></script>
+    <script src="app/controller/outPayController.js"></script>
 </body>
 </html>

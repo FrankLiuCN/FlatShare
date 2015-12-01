@@ -83,6 +83,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
+    <Content Include="app\controller\outPayController.js" />
     <Content Include="app\controller\payItemController.js" />
     <Content Include="app\data-service.js" />
     <Content Include="app\grid-helpers.js" />
@@ -111,6 +112,7 @@
       <DependentUpon>FlatShareDBModel.edmx</DependentUpon>
       <LastGenOutput>FlatShareDBModel.cs</LastGenOutput>
     </Content>
+    <Content Include="OutPay.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -136,7 +138,9 @@
     <Content Include="PayItem.html" />
     <Content Include="Index.html" />
     <Content Include="Login.html" />
+    <Content Include="scripts\angular-route.min.js" />
     <Content Include="scripts\angular.min.js" />
+    <Content Include="scripts\common.js" />
     <Content Include="scripts\jquery-1.11.3.min.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.ar.js" />
     <Content Include="scripts\locales\bootstrap-datetimepicker.bg.js" />

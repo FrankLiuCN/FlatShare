@@ -72,6 +72,6 @@
     display: inline-block;
 }
 
-.highlight{
-    background-color: red
+.click-highlight {
+    background-color:#e27979;
 }
