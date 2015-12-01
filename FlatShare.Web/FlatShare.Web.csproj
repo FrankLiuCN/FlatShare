@@ -83,8 +83,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.js" />
-    <Content Include="app\controller\outPayController.js" />
+    <Content Include="app\controller\outlayController.js" />
     <Content Include="app\controller\payItemController.js" />
+    <Content Include="app\controller\userAccountController.js" />
     <Content Include="app\data-service.js" />
     <Content Include="app\grid-helpers.js" />
     <Content Include="app\listpager.js" />
@@ -112,7 +113,7 @@
       <DependentUpon>FlatShareDBModel.edmx</DependentUpon>
       <LastGenOutput>FlatShareDBModel.cs</LastGenOutput>
     </Content>
-    <Content Include="OutPay.html" />
+    <Content Include="Outlay.html" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -135,6 +136,7 @@
     <Content Include="css\payItem.css" />
     <Content Include="Datepicker\bootstrap-datepicker.js" />
     <Content Include="Datepicker\datepicker.css" />
+    <Content Include="UserAccount.html" />
     <Content Include="PayItem.html" />
     <Content Include="Index.html" />
     <Content Include="Login.html" />
@@ -188,7 +190,9 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AppCode\Api\OutlayController.cs" />
     <Compile Include="AppCode\Api\PayItemController.cs" />
+    <Compile Include="AppCode\Api\UserAccountController.cs" />
     <Compile Include="AppCode\WebApiConfig.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>

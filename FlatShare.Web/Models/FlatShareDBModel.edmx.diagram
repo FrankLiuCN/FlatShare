@@ -7,7 +7,7 @@
       <Diagram DiagramId="ac64525c0bd544f6acac7828a53216af" Name="Diagram1">
         <EntityTypeShape EntityType="FlatShareModel.Outlay" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="FlatShareModel.PayItem" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FlatShareModel.UserAccount" Width="1.5" PointX="2.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FlatShareModel.UserAccount" Width="1.5" PointX="1.875" PointY="3.625" IsExpanded="true" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

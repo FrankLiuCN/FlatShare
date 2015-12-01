@@ -35,7 +35,7 @@
         deleteById: function (url, id) {
             return $http({
                 url: webRoot(url) + "/" + id,
-                method: 'DELETE'
+                method: 'GET'
             });
         },
         // delete selected items
@@ -49,7 +49,7 @@
         updateItem: function (url, item) {
             return $http({
                 url: webRoot(url),
-                method: 'PUT',
+                method: 'post',
                 data: item
             });
         },

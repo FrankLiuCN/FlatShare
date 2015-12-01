@@ -39,7 +39,7 @@ namespace FlatShare.Web.AppCode.Api
             var result = from p in db.PayItem
                          where p.LogicalDelete != true
                          select new { 
-                            RowId=p.RowID,
+                            RowID=p.RowID,
                             ItemName=p.ItemName
                          };
             return Ok(result);

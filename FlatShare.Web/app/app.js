@@ -7,9 +7,15 @@ app.config(function ($routeProvider) {
         templateUrl: "/payItem.html"
     });
 
-    $routeProvider.when("/outPay", {
-        controller: "outPayController",
-        templateUrl: "/OutPay.html"
+    $routeProvider.when("/outlay", {
+        controller: "outlayController",
+        templateUrl: "/Outlay.html"
+    });
+
+
+    $routeProvider.when("/userAccount", {
+        controller: "userAccountController",
+        templateUrl: "/UserAccount.html"
     });
 
     //$routeProvider.otherwise({ redirectTo: "/payItem" });
