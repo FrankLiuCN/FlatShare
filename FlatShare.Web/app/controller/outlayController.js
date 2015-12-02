@@ -2,6 +2,7 @@
     $scope.payItems = [];
     $scope.users = [];
     $scope.selectdPayItem;
+    $scope.datepicker = { date: new Date() };
     $scope.outlay = {
         RowID: '',
         PayMoney: '',
@@ -66,6 +67,7 @@
     };
 
     $scope.saveOutlay = function () {
+        $scope.outlay.PayDate = $scope.datepicker.date;
         $scope.outlay.RowID = 0;
         dataService.addItem("Outlay/PostOutlay", $scope.outlay)
         .success(function (data) {

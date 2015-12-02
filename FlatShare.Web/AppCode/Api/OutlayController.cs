@@ -81,7 +81,7 @@ namespace FlatShare.Web.AppCode.Api
             db.Outlay.Add(outlay);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = outlay.RowID }, outlay);
+            return Ok(outlay);
         }
 
         // DELETE api/Outlay/5

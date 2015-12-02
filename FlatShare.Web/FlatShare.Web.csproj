@@ -99,6 +99,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>FlatShareDBModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="Datepicker\bootstrap-datepicker.css" />
     <Content Include="Global.asax" />
     <Content Include="Models\FlatShareDBModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -135,7 +136,6 @@
     <Content Include="css\Login.css" />
     <Content Include="css\payItem.css" />
     <Content Include="Datepicker\bootstrap-datepicker.js" />
-    <Content Include="Datepicker\datepicker.css" />
     <Content Include="UserAccount.html" />
     <Content Include="PayItem.html" />
     <Content Include="Index.html" />

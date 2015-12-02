@@ -5,5 +5,11 @@
         $('.click-highlight').removeClass('click-highlight');
         $(this).addClass("click-highlight");
     });
+    app.value('$strapConfig', {
+          datepicker: {
+            language: 'fr',
+            format: 'M d, yyyy'
+          }
+    });
 
 });
