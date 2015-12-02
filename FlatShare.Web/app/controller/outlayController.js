@@ -1,8 +1,11 @@
 ﻿app.controller('outlayController', ['$scope', "$filter", 'dataService', function ($scope, $filter, dataService) {
     $scope.payItems = [];
     $scope.users = [];
+    $scope.outlays = [];
     $scope.selectdPayItem;
-    $scope.datepicker = { date: new Date() };
+    $scope.totalCount = 0;
+    $scope.itemsPerPage = 10;
+    $scope.datepicker = { date: (new Date()).Format("yyyy-MM-dd") }
     $scope.outlay = {
         RowID: '',
         PayMoney: '',
@@ -12,7 +15,20 @@
         Remark: '',
         LogicalDelete: '',
     };
-    $scope.load = function () { };
+    $scope.load = function () {
+        dataService.getItems('Outlay/GetOutlays', { take: $scope.itemsPerPage, skip: 0 })
+        .success(function (data) {
+            $scope.totalCount = data.total;
+            angular.copy(data.outlays, $scope.outlays);
+            $scope.totalPage = Math.floor(($scope.totalCount + $scope.itemsPerPage - 1) / $scope.itemsPerPage);
+            $scope.currentPage = 0;
+            gridInit($scope)
+        })
+        .error(function (data) {
+            alert(data);
+        });
+        $scope.isSelectedOutlay = false;
+    };
 
     $scope.loadPayItems = function () {
         dataService.getItems('PayItem/GetPayItems')
@@ -50,7 +66,7 @@
         for (var i = 0; i < ids.length; i++) {
             if (ids[i] == id) {
                 ids.splice(i, 1);
-                 $scope.outlay.ShareID = ids.toString();
+                $scope.outlay.ShareID = ids.toString();
                 return;
             }
         }
@@ -67,7 +83,7 @@
     };
 
     $scope.saveOutlay = function () {
-        $scope.outlay.PayDate = $scope.datepicker.date;
+        $scope.outlay.PayDate = $('.datepicker').val();
         $scope.outlay.RowID = 0;
         dataService.addItem("Outlay/PostOutlay", $scope.outlay)
         .success(function (data) {
@@ -92,4 +108,5 @@
         $scope.loadPayItems();
         $scope.loadUsers();
     };
+    $scope.load();
 }]);

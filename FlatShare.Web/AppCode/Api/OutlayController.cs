@@ -17,9 +17,48 @@ namespace FlatShare.Web.AppCode.Api
         private FlatShareEntities db = new FlatShareEntities();
 
         // GET api/Outlay
-        public IQueryable<Outlay> GetOutlay()
+        public IHttpActionResult GetOutlays(int take = 10, int skip = 0, string filter = "")
         {
-            return db.Outlay;
+            if (filter == null)
+                filter = "";
+            //IQueryable<Outlay> outlays = db.Outlay.Where(p => p.LogicalDelete != true && p.Remark.Contains(filter))
+            //    .OrderBy(p => p.RowID).Skip(skip * take).Take(take);
+
+            //int total = db.Outlay.Where(p => p.LogicalDelete != true &&
+            //    p.Remark.Contains(filter)).Count();
+            int total = (from o in db.Outlay
+                         join p in db.PayItem on o.PayItemID equals p.RowID
+                         where o.LogicalDelete != true &&
+                         (p.ItemName.Contains(filter) || o.Remark.Contains(filter))
+                         select new
+                         {
+                             RowID = o.RowID
+                         }).Count();
+            var lookup = (from u in db.UserAccount select u).ToDictionary(x => x.RowID.ToString(), x => x.LoginName);
+            var outlays = (
+                          from o in db.Outlay
+                          join p in db.PayItem on o.PayItemID equals p.RowID
+                          where o.LogicalDelete != true &&
+                          (p.ItemName.Contains(filter) || o.Remark.Contains(filter))
+                          orderby o.PayDate descending
+                          select new
+                          {
+                              RowID = o.RowID,
+                              PayItemID = o.PayItemID,
+                              PayItemName = p.ItemName,
+                              PayMoney = o.PayMoney,
+                              PayDate = o.PayDate,
+                              ShareID = o.ShareID,
+                              Remark = o.Remark,
+                              ShareName = string.Join(",", o.ShareID.Split(',').Where(x => lookup.ContainsKey(x)).Select(x => lookup[x]))
+                          }).Skip(skip * take).Take(take);
+            //var dd = string.Join(",",outlays[0].ShareID.Split(',').Where(x => lookup.ContainsKey(x)).Select(x => lookup[x]));
+            var result = new
+            {
+                total = total,
+                outlays = outlays
+            };
+            return Ok(result);
         }
 
         // GET api/Outlay/5

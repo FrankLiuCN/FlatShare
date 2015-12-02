@@ -4,7 +4,7 @@
         <div class="panel-heading">支出信息</div>
         <div class="panel-body">
             <div class="botton-container">
-                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddOutlay()" data-target="#largeModal">添加</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddOutlay()" data-target="#addOrEditModal">添加</button>
                 <button type="button" class="btn btn-default">编辑</button>
                 <button type="button" class="btn btn-default">删除</button>
             </div>
@@ -19,37 +19,33 @@
                         <th>开支项目</th>
                         <th>支付金额</th>
                         <th>支付日期</th>
-                        <th>备注</th>
                         <th>平摊人员</th>
+                        <th>备注</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX">
-                        <td>Trident</td>
-                        <td>Internet Explorer 4.0</td>
-                        <td>Win 95+</td>
-                        <td class="center">4</td>
-                        <td class="center">X</td>
-                        <td class="center">X</td>
+                    <tr class="odd gradeX" ng-repeat="outlay in outlays">
+                        <td>{{outlay.RowID}}</td>
+                        <td>{{outlay.PayItemName}}</td>
+                        <td>{{outlay.PayMoney}}</td>
+                        <td>{{outlay.PayDate| date:'yyyy-MM-dd'}}</td>
+                        <td class="center">{{outlay.ShareID}}</td>
+                        <td class="center">{{outlay.Remark}}</td>
                     </tr>
                 </tbody>
             </table>
             <div class="pagination-container">
                 <ul class="pagination pagination-costom">
-                    <li><a href="#">&laquo;</a></li>
-                    <li><a href="#">1</a></li>
-                    <li><a href="#">2</a></li>
-                    <li><a href="#">3</a></li>
-                    <li><a href="#">4</a></li>
-                    <li><a href="#">5</a></li>
-                    <li><a href="#">&raquo;</a></li>
+                    <li><a ng-click="prevPage()" title="上一页"><i class="fa fa-angle-left"></i>上一页</a></li>
+                    <li ng-repeat="n in pagedItems" ng-class="{active: n == currentPage}" ng-click="setPage()"><a ng-bind="n + 1">1</a></li>
+                    <li ng-class="{disabled: currentPage == totalPage}"><a ng-click="nextPage()" title="下一页"><i class="fa fa-angle-right"></i>下一页</a></li>
                 </ul>
             </div>
         </div>
     </div>
 
 
-    <div class="modal fade" id="largeModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
+    <div class="modal fade" id="addOrEditModal" tabindex="-1" role="dialog" aria-labelledby="largeModal" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
@@ -67,7 +63,7 @@
                         <div class="col-md-6">
                             <label>
                                 支付金额:
-                                <input type="text" class="form-control" ng-model="outlay.PayMoney"/>
+                                <input type="text" class="form-control" ng-model="outlay.PayMoney" />
                             </label>
                         </div>
                     </div>
