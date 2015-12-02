@@ -4,7 +4,7 @@
         <div class="panel-heading">支出信息</div>
         <div class="panel-body">
             <div class="botton-container">
-                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="addOrEditOutPay()" data-target="#largeModal">添加</button>
+                <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddOutlay()" data-target="#largeModal">添加</button>
                 <button type="button" class="btn btn-default">编辑</button>
                 <button type="button" class="btn btn-default">删除</button>
             </div>
@@ -29,27 +29,6 @@
                         <td>Win 95+</td>
                         <td class="center">4</td>
                         <td class="center">X</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td class="center">5</td>
-                        <td class="center">C</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td class="center">5</td>
-                        <td class="center">C</td>
-                    </tr>
-                    <tr class="even gradeC">
-                        <td>Trident</td>
-                        <td>Internet Explorer 5.0</td>
-                        <td>Win 95+</td>
-                        <td class="center">5</td>
-                        <td class="center">C</td>
                     </tr>
                 </tbody>
             </table>
@@ -80,13 +59,13 @@
                         <div class="col-md-6">
                             <label>
                                 开支项目:
-                                <select class="form-control" ng-model="selectdPayItem" ng-options="value.RowID as value.ItemName for value in payItems"></select>
+                                <select class="form-control" ng-model="outlay.PayItemID" ng-options="value.RowID as value.ItemName for value in payItems"></select>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label>
                                 支付金额:
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" ng-model="outlay.PayMoney"/>
                             </label>
                         </div>
                     </div>
@@ -94,13 +73,13 @@
                         <div class="col-md-6">
                             <label>
                                 支付日期:
-                                <input type="text" readonly class="datepicker form-control" data-date-format="yyyy-mm-dd">
+                                <input type="text" ng-model="outlay.PayDate" readonly class="datepicker form-control" data-date-format="yyyy-mm-dd">
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label>
                                 备&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;注:
-                                <input type="text" class="form-control" />
+                                <input type="text" class="form-control" ng-model="outlay.Remark" />
                             </label>
                         </div>
                     </div>
@@ -108,16 +87,8 @@
                         <div class="col-md-11">
                             <div class="btn-group" data-toggle="buttons">
                                 <span>平摊人员:&nbsp;</span>
-
-
-                                <label class="btn btn-default">
-                                    <input type="checkbox"> 选项 1
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="checkbox"> 选项 2
-                                </label>
-                                <label class="btn btn-default">
-                                    <input type="checkbox"> 选项 3
+                                <label class="btn btn-default active" ng-repeat="user in users" ng-click="userChecked($event,user.RowID)">
+                                    <input type="checkbox" value="{{user.RowID}}"> {{user.UserName}}
                                 </label>
                             </div>
                         </div>
@@ -126,7 +97,7 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <button type="button" class="btn btn-primary" ng-click="addOrEditOutlay()">保存</button>
                 </div>
             </div>
         </div>

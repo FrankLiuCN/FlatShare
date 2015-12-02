@@ -19,7 +19,7 @@ namespace FlatShare.Web.AppCode.Api
         // GET api/UserAccount
         public IQueryable<UserAccount> GetUserAccount()
         {
-            return db.UserAccount;
+            return db.UserAccount.Where(u => u.LogicalDelete != true);
         }
 
         // GET api/UserAccount/5
@@ -79,7 +79,7 @@ namespace FlatShare.Web.AppCode.Api
             return Ok(useraccount);
         }
 
-        [HttpGet]
+        [HttpDelete]
         public IHttpActionResult DeleteUserAccount(int id)
         {
             UserAccount useraccount = db.UserAccount.Find(id);
@@ -87,8 +87,9 @@ namespace FlatShare.Web.AppCode.Api
             {
                 return NotFound();
             }
-
-            db.UserAccount.Remove(useraccount);
+            useraccount.LastUpdatedDate = DateTime.Now;
+            useraccount.LogicalDelete = true;
+            db.Entry(useraccount).State = EntityState.Modified;
             db.SaveChanges();
 
             return Ok(useraccount);

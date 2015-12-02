@@ -35,7 +35,7 @@
         deleteById: function (url, id) {
             return $http({
                 url: webRoot(url) + "/" + id,
-                method: 'GET'
+                method: 'DELETE'
             });
         },
         // delete selected items

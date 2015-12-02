@@ -47,7 +47,7 @@ namespace FlatShare.Web.AppCode.Api
             {
                 return BadRequest();
             }
-
+            outlay.LastUpdatedDate = DateTime.Now;
             db.Entry(outlay).State = EntityState.Modified;
 
             try
@@ -77,7 +77,7 @@ namespace FlatShare.Web.AppCode.Api
             {
                 return BadRequest(ModelState);
             }
-
+            outlay.LastUpdatedDate = DateTime.Now;
             db.Outlay.Add(outlay);
             db.SaveChanges();
 
@@ -93,9 +93,25 @@ namespace FlatShare.Web.AppCode.Api
             {
                 return NotFound();
             }
-
+            outlay.LastUpdatedDate = DateTime.Now;
             db.Outlay.Remove(outlay);
-            db.SaveChanges();
+            db.Entry(outlay).State = EntityState.Modified;
+
+            try
+            {
+                db.SaveChanges();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!OutlayExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
 
             return Ok(outlay);
         }
