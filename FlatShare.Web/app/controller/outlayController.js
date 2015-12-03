@@ -52,7 +52,7 @@
     }
 
     $scope.loadPayItems = function () {
-        dataService.getItems('PayItem/GetPayItems')
+        dataService.getItems('PayItem/GetPayItem')
         .success(function (data) {
             angular.copy(data, $scope.payItems);
         })

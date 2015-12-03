@@ -34,6 +34,13 @@ namespace FlatShare.Web.AppCode.Api
             return Ok(result);
         }
 
+        public IHttpActionResult GetPayItem()
+        {
+            IQueryable<PayItem> items = db.PayItem.Where(p => p.LogicalDelete != true)
+                .OrderBy(p => p.RowID);
+            return Ok(items);
+        }
+
         // GET api/PayItem/5
         [ResponseType(typeof(PayItem))]
         public IHttpActionResult GetPayItem(int id)
