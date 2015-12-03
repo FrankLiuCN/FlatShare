@@ -1,21 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FlatShareModelStoreContainer" CdmEntityContainer="FlatShareEntities">
-    <EntitySetMapping Name="Outlay">
-      <EntityTypeMapping TypeName="FlatShareModel.Outlay">
-        <MappingFragment StoreEntitySet="Outlay">
-          <ScalarProperty Name="RowID" ColumnName="RowID" />
-          <ScalarProperty Name="PayMoney" ColumnName="PayMoney" />
-          <ScalarProperty Name="PayItemID" ColumnName="PayItemID" />
-          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
-          <ScalarProperty Name="ShareID" ColumnName="ShareID" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="LogicalDelete" ColumnName="LogicalDelete" />
-          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <EntitySetMapping Name="PayItem">
       <EntityTypeMapping TypeName="FlatShareModel.PayItem">
         <MappingFragment StoreEntitySet="PayItem">
@@ -40,6 +25,30 @@
           <ScalarProperty Name="LogicalDelete" ColumnName="LogicalDelete" />
           <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
           <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PayUserShare">
+      <EntityTypeMapping TypeName="FlatShareModel.PayUserShare">
+        <MappingFragment StoreEntitySet="PayUserShare">
+          <ScalarProperty Name="ShareUserName" ColumnName="ShareUserName" />
+          <ScalarProperty Name="ShareUserID" ColumnName="ShareUserID" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Outlay">
+      <EntityTypeMapping TypeName="FlatShareModel.Outlay">
+        <MappingFragment StoreEntitySet="Outlay">
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LogicalDelete" ColumnName="LogicalDelete" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="ShareID" ColumnName="ShareID" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="PayItemID" ColumnName="PayItemID" />
+          <ScalarProperty Name="PayMoney" ColumnName="PayMoney" />
+          <ScalarProperty Name="RowID" ColumnName="RowID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

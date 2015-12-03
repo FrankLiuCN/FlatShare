@@ -25,8 +25,9 @@ namespace FlatShare.Web.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<Outlay> Outlay { get; set; }
         public virtual DbSet<PayItem> PayItem { get; set; }
         public virtual DbSet<UserAccount> UserAccount { get; set; }
+        public virtual DbSet<PayUserShare> PayUserShare { get; set; }
+        public virtual DbSet<Outlay> Outlay { get; set; }
     }
 }

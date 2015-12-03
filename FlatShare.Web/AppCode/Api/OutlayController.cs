@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using FlatShare.Web.Models;
+using Newtonsoft.Json;
 
 namespace FlatShare.Web.AppCode.Api
 {
@@ -19,27 +20,21 @@ namespace FlatShare.Web.AppCode.Api
         // GET api/Outlay
         public IHttpActionResult GetOutlays(int take = 10, int skip = 0, string filter = "")
         {
-            if (filter == null)
+           if (filter == null)
                 filter = "";
-            //IQueryable<Outlay> outlays = db.Outlay.Where(p => p.LogicalDelete != true && p.Remark.Contains(filter))
-            //    .OrderBy(p => p.RowID).Skip(skip * take).Take(take);
-
-            //int total = db.Outlay.Where(p => p.LogicalDelete != true &&
-            //    p.Remark.Contains(filter)).Count();
             int total = (from o in db.Outlay
                          join p in db.PayItem on o.PayItemID equals p.RowID
+                         join s in db.PayUserShare on o.ShareID equals s.RowID
                          where o.LogicalDelete != true &&
-                         (p.ItemName.Contains(filter) || o.Remark.Contains(filter))
-                         select new
-                         {
-                             RowID = o.RowID
-                         }).Count();
-            var lookup = (from u in db.UserAccount select u).ToDictionary(x => x.RowID.ToString(), x => x.LoginName);
-            var outlays = (
-                          from o in db.Outlay
+                         (p.ItemName.Contains(filter) || o.Remark.Contains(filter) 
+                         )
+                         select o.RowID).Count();
+            var outlays = (from o in db.Outlay
                           join p in db.PayItem on o.PayItemID equals p.RowID
+                          join s in db.PayUserShare on o.ShareID equals s.RowID
                           where o.LogicalDelete != true &&
-                          (p.ItemName.Contains(filter) || o.Remark.Contains(filter))
+                          (p.ItemName.Contains(filter) || o.Remark.Contains(filter)
+                          )
                           orderby o.PayDate descending
                           select new
                           {
@@ -50,9 +45,9 @@ namespace FlatShare.Web.AppCode.Api
                               PayDate = o.PayDate,
                               ShareID = o.ShareID,
                               Remark = o.Remark,
-                              ShareName = string.Join(",", o.ShareID.Split(',').Where(x => lookup.ContainsKey(x)).Select(x => lookup[x]))
+                              ShareUserID=s.ShareUserID,
+                              ShareUserName=s.ShareUserName
                           }).Skip(skip * take).Take(take);
-            //var dd = string.Join(",",outlays[0].ShareID.Split(',').Where(x => lookup.ContainsKey(x)).Select(x => lookup[x]));
             var result = new
             {
                 total = total,
@@ -75,17 +70,26 @@ namespace FlatShare.Web.AppCode.Api
         }
 
         // PUT api/Outlay/5
-        public IHttpActionResult PutOutlay(int id, Outlay outlay)
+        public IHttpActionResult PutOutlay(Dictionary<string, object> obj)
         {
+            Outlay outlay = JsonConvert.DeserializeObject<Outlay>(obj["outlay"].ToString());
+            PayUserShare payUserShare = JsonConvert.DeserializeObject<PayUserShare>(obj["payUserShare"].ToString());
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
-
-            if (id != outlay.RowID)
+            PayUserShare share = db.PayUserShare.Where(s => s.ShareUserID == payUserShare.ShareUserID).SingleOrDefault();
+            if (share == null)
             {
-                return BadRequest();
+                db.PayUserShare.Add(payUserShare);
+                db.SaveChanges();
+                outlay.ShareID = payUserShare.RowID;
             }
+            else
+            {
+                outlay.ShareID = share.RowID;
+            }
+
             outlay.LastUpdatedDate = DateTime.Now;
             db.Entry(outlay).State = EntityState.Modified;
 
@@ -95,7 +99,7 @@ namespace FlatShare.Web.AppCode.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!OutlayExists(id))
+                if (!OutlayExists(outlay.RowID))
                 {
                     return NotFound();
                 }
@@ -109,13 +113,26 @@ namespace FlatShare.Web.AppCode.Api
         }
 
         // POST api/Outlay
-        [ResponseType(typeof(Outlay))]
-        public IHttpActionResult PostOutlay(Outlay outlay)
+        //public IHttpActionResult PostOutlay(PostOutlay postOutlay)
+        public IHttpActionResult PostOutlay(Dictionary<string, object> obj)
         {
+            Outlay outlay = JsonConvert.DeserializeObject<Outlay>(obj["outlay"].ToString());
+            PayUserShare payUserShare = JsonConvert.DeserializeObject<PayUserShare>(obj["payUserShare"].ToString());
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
+            PayUserShare share = db.PayUserShare.Where(s => s.ShareUserID == payUserShare.ShareUserID).SingleOrDefault();
+            if (share == null)
+            {
+                db.PayUserShare.Add(payUserShare);
+                db.SaveChanges();
+                outlay.ShareID = payUserShare.RowID;
+            }
+            else {
+                outlay.ShareID = share.RowID;
+            }
+
             outlay.LastUpdatedDate = DateTime.Now;
             db.Outlay.Add(outlay);
             db.SaveChanges();

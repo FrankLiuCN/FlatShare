@@ -218,6 +218,9 @@
     <Compile Include="Models\PayItem.cs">
       <DependentUpon>FlatShareDBModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\PayUserShare.cs">
+      <DependentUpon>FlatShareDBModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\UserAccount.cs">
       <DependentUpon>FlatShareDBModel.tt</DependentUpon>
     </Compile>

@@ -5,7 +5,7 @@
         <div class="panel-body">
             <div class="botton-container">
                 <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddPayItem()" data-target="#addOrEditModal">添加</button>
-                <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" data-toggle="modal" data-target="#addOrEditModal">编辑</button>
+                <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" data-toggle="modal" ng-click="clickEditPayItem()" data-target="#addOrEditModal">编辑</button>
                 <button type="button" class="btn btn-default" ng-disabled="!isSelectedPayItem" ng-click="deletePayItem()">删除</button>
             </div>
             <div class="search-container">
@@ -22,7 +22,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX {{}}" ng-repeat="item in PayItems" ng-click="setPayItem()">
+                    <tr class="odd gradeX" ng-repeat="item in PayItems" ng-click="setPayItem()">
                         <td>{{item.RowID}}</td>
                         <td>{{item.ItemName}}</td>
                         <td>{{item.Remark}}</td>

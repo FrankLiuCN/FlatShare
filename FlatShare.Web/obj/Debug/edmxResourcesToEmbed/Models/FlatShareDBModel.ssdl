@@ -7,8 +7,8 @@
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PayMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PayItemID" Type="int" Nullable="false" />
-    <Property Name="PayDate" Type="date" Nullable="false" />
-    <Property Name="ShareID" Type="nvarchar" MaxLength="250" Nullable="false" />
+    <Property Name="PayDate" Type="datetime" Nullable="false" />
+    <Property Name="ShareID" Type="int" Nullable="false" />
     <Property Name="Remark" Type="nvarchar" MaxLength="250" />
     <Property Name="LogicalDelete" Type="bit" />
     <Property Name="LastUpdatedBy" Type="int" Nullable="false" />
@@ -24,6 +24,14 @@
     <Property Name="LogicalDelete" Type="bit" />
     <Property Name="LastUpdatedBy" Type="int" />
     <Property Name="LastUpdatedDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="PayUserShare">
+    <Key>
+      <PropertyRef Name="RowID" />
+    </Key>
+    <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ShareUserID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ShareUserName" Type="nvarchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="UserAccount">
     <Key>
@@ -42,6 +50,7 @@
   <EntityContainer Name="FlatShareModelStoreContainer">
     <EntitySet Name="Outlay" EntityType="Self.Outlay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PayItem" EntityType="Self.PayItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayUserShare" EntityType="Self.PayUserShare" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

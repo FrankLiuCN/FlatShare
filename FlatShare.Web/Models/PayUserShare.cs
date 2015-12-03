@@ -12,16 +12,10 @@ namespace FlatShare.Web.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Outlay
+    public partial class PayUserShare
     {
         public int RowID { get; set; }
-        public decimal PayMoney { get; set; }
-        public int PayItemID { get; set; }
-        public System.DateTime PayDate { get; set; }
-        public int ShareID { get; set; }
-        public string Remark { get; set; }
-        public Nullable<bool> LogicalDelete { get; set; }
-        public int LastUpdatedBy { get; set; }
-        public System.DateTime LastUpdatedDate { get; set; }
+        public string ShareUserID { get; set; }
+        public string ShareUserName { get; set; }
     }
 }

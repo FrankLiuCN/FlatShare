@@ -5,11 +5,11 @@
         <div class="panel-body">
             <div class="botton-container">
                 <button type="button" class="btn btn-default" data-toggle="modal" ng-click="clickAddOutlay()" data-target="#addOrEditModal">添加</button>
-                <button type="button" class="btn btn-default">编辑</button>
-                <button type="button" class="btn btn-default">删除</button>
+                <button type="button" class="btn btn-default" ng-disabled="!isSelectedOutlay" ng-click="clickEditPayItem()" data-toggle="modal" data-target="#addOrEditModal">编辑</button>
+                <button type="button" class="btn btn-default" ng-disabled="!isSelectedOutlay">删除</button>
             </div>
             <div class="search-container">
-                <label>搜索: <input class="form-control"></label>
+                <label>搜索: <input class="form-control" ng-change="search()" ng-model="filter"></label>
 
             </div>
             <table class="table table-bordered">
@@ -24,12 +24,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="odd gradeX" ng-repeat="outlay in outlays">
+                    <tr class="odd gradeX" ng-repeat="outlay in outlays" ng-click="setOutlay()">
                         <td>{{outlay.RowID}}</td>
                         <td>{{outlay.PayItemName}}</td>
                         <td>{{outlay.PayMoney}}</td>
                         <td>{{outlay.PayDate| date:'yyyy-MM-dd'}}</td>
-                        <td class="center">{{outlay.ShareID}}</td>
+                        <td class="center">{{outlay.ShareUserName}}</td>
                         <td class="center">{{outlay.Remark}}</td>
                     </tr>
                 </tbody>
@@ -57,13 +57,13 @@
                         <div class="col-md-6">
                             <label>
                                 开支项目:
-                                <select class="form-control" ng-model="outlay.PayItemID" ng-options="value.RowID as value.ItemName for value in payItems"></select>
+                                <select class="form-control" ng-model="outlay.PayItemID" ng-options="option.ItemName for option in payItems track by option.RowID" required></select>
                             </label>
                         </div>
                         <div class="col-md-6">
                             <label>
                                 支付金额:
-                                <input type="text" class="form-control" ng-model="outlay.PayMoney" />
+                                <input type="number" class="form-control" ng-model="outlay.PayMoney" required />
                             </label>
                         </div>
                     </div>
@@ -71,7 +71,7 @@
                         <div class="col-md-6">
                             <label>
                                 支付日期:
-                                <input type="text" ng-model="datepicker.date" readonly class="datepicker form-control" data-date-format="yyyy-mm-dd" />
+                                <input type="text" ng-model="datepicker.date" readonly class="datepicker form-control" data-date-format="yyyy-mm-dd" required />
                             </label>
                         </div>
                         <div class="col-md-6">
@@ -85,8 +85,8 @@
                         <div class="col-md-11">
                             <div class="btn-group" data-toggle="buttons">
                                 <span>平摊人员:&nbsp;</span>
-                                <label class="btn btn-default active" ng-repeat="user in users" ng-click="userChecked($event,user.RowID)">
-                                    <input type="checkbox" value="{{user.RowID}}"> {{user.UserName}}
+                                <label class="btn btn-default" ng-repeat="user in shareUsers" ng-click="userChecked($event,user.RowID,user.UserName)">
+                                    <input type="checkbox" value="{{user.RowID}}" ng-checked="user.IsSelected"> {{user.UserName}}
                                 </label>
                             </div>
                         </div>
@@ -95,7 +95,9 @@
 
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary" ng-click="addOrEditOutlay()">保存</button>
+                    <button type="button" class="btn btn-primary" ng-click="addOrEditOutlay()" ng-disabled="!outlay.PayItemID||!outlay.PayMoney||!payUserShare.ShareUserID">
+                        保存
+                    </button>
                 </div>
             </div>
         </div>
