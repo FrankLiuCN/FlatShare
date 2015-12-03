@@ -46,11 +46,12 @@
     <Property Name="RowID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="PayMoney" Type="Decimal" Nullable="false" Precision="18" Scale="2" />
     <Property Name="PayItemID" Type="Int32" Nullable="false" />
-    <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PayDate" Type="DateTime" Nullable="false" Precision="0" />
     <Property Name="ShareID" Type="Int32" Nullable="false" />
     <Property Name="Remark" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
     <Property Name="LogicalDelete" Type="Boolean" />
     <Property Name="LastUpdatedBy" Type="Int32" Nullable="false" />
     <Property Name="LastUpdatedDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="PayUserID" Type="Int32" />
   </EntityType>
 </Schema>

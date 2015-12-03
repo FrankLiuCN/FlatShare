@@ -23,5 +23,6 @@ namespace FlatShare.Web.Models
         public Nullable<bool> LogicalDelete { get; set; }
         public int LastUpdatedBy { get; set; }
         public System.DateTime LastUpdatedDate { get; set; }
+        public Nullable<int> PayUserID { get; set; }
     }
 }

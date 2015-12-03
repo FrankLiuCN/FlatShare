@@ -20,34 +20,40 @@ namespace FlatShare.Web.AppCode.Api
         // GET api/Outlay
         public IHttpActionResult GetOutlays(int take = 10, int skip = 0, string filter = "")
         {
-           if (filter == null)
+            if (filter == null)
                 filter = "";
             int total = (from o in db.Outlay
                          join p in db.PayItem on o.PayItemID equals p.RowID
-                         join s in db.PayUserShare on o.ShareID equals s.RowID
+                         //join s in db.PayUserShare on o.ShareID equals s.RowID
+                         join u in db.UserAccount on o.PayUserID equals u.RowID
                          where o.LogicalDelete != true &&
-                         (p.ItemName.Contains(filter) || o.Remark.Contains(filter) 
+                         (p.ItemName.Contains(filter) || o.Remark.Contains(filter)
+                          || u.UserName.Contains(filter)
                          )
                          select o.RowID).Count();
             var outlays = (from o in db.Outlay
-                          join p in db.PayItem on o.PayItemID equals p.RowID
-                          join s in db.PayUserShare on o.ShareID equals s.RowID
-                          where o.LogicalDelete != true &&
-                          (p.ItemName.Contains(filter) || o.Remark.Contains(filter)
-                          )
-                          orderby o.PayDate descending
-                          select new
-                          {
-                              RowID = o.RowID,
-                              PayItemID = o.PayItemID,
-                              PayItemName = p.ItemName,
-                              PayMoney = o.PayMoney,
-                              PayDate = o.PayDate,
-                              ShareID = o.ShareID,
-                              Remark = o.Remark,
-                              ShareUserID=s.ShareUserID,
-                              ShareUserName=s.ShareUserName
-                          }).Skip(skip * take).Take(take);
+                           join p in db.PayItem on o.PayItemID equals p.RowID
+                           join s in db.PayUserShare on o.ShareID equals s.RowID
+                           join u in db.UserAccount on o.PayUserID equals u.RowID
+                           where o.LogicalDelete != true &&
+                           (p.ItemName.Contains(filter) || o.Remark.Contains(filter)
+                           || u.UserName.Contains(filter)
+                           )
+                           orderby o.PayDate descending
+                           select new
+                           {
+                               RowID = o.RowID,
+                               PayItemID = o.PayItemID,
+                               PayItemName = p.ItemName,
+                               PayMoney = o.PayMoney,
+                               PayUserID = o.PayUserID,
+                               PayDate = o.PayDate,
+                               ShareID = o.ShareID,
+                               Remark = o.Remark,
+                               PayUserName=u.UserName,
+                               ShareUserID = s.ShareUserID,
+                               ShareUserName = s.ShareUserName
+                           }).Skip(skip * take).Take(take);
             var result = new
             {
                 total = total,
@@ -69,8 +75,7 @@ namespace FlatShare.Web.AppCode.Api
             return Ok(outlay);
         }
 
-        // PUT api/Outlay/5
-        public IHttpActionResult PutOutlay(Dictionary<string, object> obj)
+        public IHttpActionResult EditOutlay(Dictionary<string, object> obj)
         {
             Outlay outlay = JsonConvert.DeserializeObject<Outlay>(obj["outlay"].ToString());
             PayUserShare payUserShare = JsonConvert.DeserializeObject<PayUserShare>(obj["payUserShare"].ToString());
@@ -129,7 +134,8 @@ namespace FlatShare.Web.AppCode.Api
                 db.SaveChanges();
                 outlay.ShareID = payUserShare.RowID;
             }
-            else {
+            else
+            {
                 outlay.ShareID = share.RowID;
             }
 
@@ -150,9 +156,8 @@ namespace FlatShare.Web.AppCode.Api
                 return NotFound();
             }
             outlay.LastUpdatedDate = DateTime.Now;
-            db.Outlay.Remove(outlay);
+            outlay.LogicalDelete = true;
             db.Entry(outlay).State = EntityState.Modified;
-
             try
             {
                 db.SaveChanges();

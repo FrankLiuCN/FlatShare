@@ -17,7 +17,7 @@ namespace FlatShare.Web.AppCode.Api
         private FlatShareEntities db = new FlatShareEntities();
 
         // GET api/PayItem
-        public IHttpActionResult GetPayItem(int take = 10, int skip = 0, string filter = "")
+        public IHttpActionResult GetPayItems(int take = 10, int skip = 0, string filter = "")
         {
             if (filter == null)
                 filter = "";
@@ -31,17 +31,6 @@ namespace FlatShare.Web.AppCode.Api
                 total = total,
                 PayItems = items
             };
-            return Ok(result);
-        }
-        [HttpGet]
-        public IHttpActionResult GetPayItems()
-        {
-            var result = from p in db.PayItem
-                         where p.LogicalDelete != true
-                         select new { 
-                            RowID=p.RowID,
-                            ItemName=p.ItemName
-                         };
             return Ok(result);
         }
 
@@ -59,16 +48,11 @@ namespace FlatShare.Web.AppCode.Api
         }
 
         // PUT api/PayItem/5
-        public IHttpActionResult PutPayItem(int id, PayItem payitem)
+        public IHttpActionResult EditPayItem(PayItem payitem)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
-            }
-
-            if (id != payitem.RowID)
-            {
-                return BadRequest();
             }
             payitem.LastUpdatedDate = DateTime.Now;
             db.Entry(payitem).State = EntityState.Modified;
@@ -79,7 +63,7 @@ namespace FlatShare.Web.AppCode.Api
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PayItemExists(id))
+                if (!PayItemExists(payitem.RowID))
                 {
                     return NotFound();
                 }
@@ -104,7 +88,7 @@ namespace FlatShare.Web.AppCode.Api
             db.PayItem.Add(payitem);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = payitem.RowID }, payitem);
+            return Ok(payitem);
         }
 
         // DELETE api/PayItem/5
@@ -118,7 +102,6 @@ namespace FlatShare.Web.AppCode.Api
             }
             payitem.LastUpdatedDate = DateTime.Now;
             payitem.LogicalDelete = true;
-            db.PayItem.Add(payitem);
             db.Entry(payitem).State = EntityState.Modified;
 
             db.SaveChanges();

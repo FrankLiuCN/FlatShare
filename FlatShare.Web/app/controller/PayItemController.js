@@ -11,7 +11,7 @@
     };
 
     $scope.load = function () {
-        dataService.getItems('PayItem', { take: $scope.itemsPerPage, skip: 0 })
+        dataService.getItems('PayItem/GetPayItems', { take: $scope.itemsPerPage, skip: 0 })
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
@@ -27,7 +27,7 @@
 
 
     $scope.getItems = function (take, skip) {
-        dataService.getItems('PayItem', { take: take, skip: skip, filter: $scope.filter })
+        dataService.getItems('PayItem/GetPayItems', { take: take, skip: skip, filter: $scope.filter })
         .success(function (data) {
             $scope.totalCount = data.total;
             angular.copy(data.PayItems, $scope.PayItems);
@@ -53,21 +53,13 @@
     };
 
     $scope.editPayItem = function () {
-        dataService.updateItem("PayItem/" + $scope.PayItem.RowID, $scope.PayItem)
+        dataService.updateItem("PayItem/EditPayItem", $scope.PayItem)
         .success(function (data) {
-            $scope.load();
+            $scope.getItems($scope.itemsPerPage, $scope.currentPage);
             $("#addOrEditModal").modal('hide');
         })
         .error(function () {
             alert("修改失败");
-        });
-    };
-
-    $scope.getPayItem = function () {
-        payItemService.getPayItem().then(function (results) {
-            $scope.PayItem = results.data;
-        }, function (error) {
-            alert(error);
         });
     };
 
@@ -91,7 +83,7 @@
 
     $scope.savePayItem = function () {
         $scope.PayItem.RowID = 0;
-        dataService.addItem("PayItem", $scope.PayItem)
+        dataService.addItem("PayItem/PostPayItem", $scope.PayItem)
         .success(function (data) {
             $scope.load();
             $("#addOrEditModal").modal('hide');
@@ -105,9 +97,9 @@
         if (confirm("是否删除？") == false) {
             return;
         }
-        dataService.deleteById("PayItem", $scope.PayItem.RowID)
+        dataService.deleteById("PayItem/DeletePayItem", $scope.PayItem.RowID)
         .success(function (data) {
-            $scope.load();
+            $scope.getItems($scope.itemsPerPage, $scope.currentPage);
             $("#addOrEditModal").modal('hide');
         })
         .error(function () {

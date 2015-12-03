@@ -7,7 +7,8 @@
     <Property Name="RowID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PayMoney" Type="decimal" Precision="18" Scale="2" Nullable="false" />
     <Property Name="PayItemID" Type="int" Nullable="false" />
-    <Property Name="PayDate" Type="datetime" Nullable="false" />
+    <Property Name="PayUserID" Type="int" />
+    <Property Name="PayDate" Type="date" Nullable="false" />
     <Property Name="ShareID" Type="int" Nullable="false" />
     <Property Name="Remark" Type="nvarchar" MaxLength="250" />
     <Property Name="LogicalDelete" Type="bit" />
@@ -25,6 +26,8 @@
     <Property Name="LastUpdatedBy" Type="int" />
     <Property Name="LastUpdatedDate" Type="datetime" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'FlatShare.dbo.PayUserShare' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="PayUserShare">
     <Key>
       <PropertyRef Name="RowID" />
@@ -50,7 +53,13 @@
   <EntityContainer Name="FlatShareModelStoreContainer">
     <EntitySet Name="Outlay" EntityType="Self.Outlay" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="PayItem" EntityType="Self.PayItem" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="PayUserShare" EntityType="Self.PayUserShare" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="UserAccount" EntityType="Self.UserAccount" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PayUserShare" EntityType="Self.PayUserShare" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [PayUserShare].[RowID] AS [RowID], 
+    [PayUserShare].[ShareUserID] AS [ShareUserID], 
+    [PayUserShare].[ShareUserName] AS [ShareUserName]
+    FROM [dbo].[PayUserShare] AS [PayUserShare]</DefiningQuery>
+    </EntitySet>
   </EntityContainer>
 </Schema>

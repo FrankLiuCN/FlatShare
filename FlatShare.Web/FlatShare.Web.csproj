@@ -109,6 +109,7 @@
     <Content Include="Models\FlatShareDBModel.edmx.diagram">
       <DependentUpon>FlatShareDBModel.edmx</DependentUpon>
     </Content>
+    <Content Include="Models\FlatShareDBModel.edmx.sql" />
     <Content Include="Models\FlatShareDBModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>FlatShareDBModel.edmx</DependentUpon>

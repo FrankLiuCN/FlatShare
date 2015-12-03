@@ -15,6 +15,7 @@
         RowID: '',
         PayMoney: '',
         PayItemID: '',
+        PayUserID: '',
         PayDate: '',
         ShareID: '',
         Remark: '',
@@ -114,38 +115,25 @@
     };
 
     $scope.userChecked = function ($event, id, name) {
-        if ($event.currentTarget.className.indexOf("active") == -1) {
-            
-        }
         for (var i = 0; i < $scope.shareUsers.length; i++) {
             if ($scope.shareUsers[i].RowID == id) {
                 $scope.shareUsers[i].IsSelected = !$scope.shareUsers[i].IsSelected;
                 break;
             }
         }
-
-        var ids = [];
-        var names = [];
-        if ($scope.payUserShare.ShareUserID != "") {
-            ids = $scope.payUserShare.ShareUserID.split(",");
-            names = $scope.payUserShare.ShareUserName.split(",");
-        }
-        for (var i = 0; i < ids.length; i++) {
-            if (ids[i] == id) {
-                ids.splice(i, 1);
-                names.splice(i, 1);
-                $scope.payUserShare.ShareUserID = ids.toString();
-                $scope.payUserShare.ShareUserName = names.toString();
-                return;
-            }
-        }
-        ids.push(id);
-        names.push(name);
-        $scope.payUserShare.ShareUserID = ids.toString();
-        $scope.payUserShare.ShareUserName = names.toString();
     };
 
     $scope.addOrEditOutlay = function () {
+        $scope.payUserShare.ShareUserID = "";
+        $scope.payUserShare.ShareUserName = "";
+        for (var i = 0; i < $scope.shareUsers.length; i++) {
+            if ($scope.shareUsers[i].IsSelected) {
+                $scope.payUserShare.ShareUserID += $scope.users[i].RowID + ",";
+                $scope.payUserShare.ShareUserName += $scope.users[i].UserName + ",";
+            }
+        }
+        $scope.payUserShare.ShareUserID = $scope.payUserShare.ShareUserID.replace(/.$/g, '');
+        $scope.payUserShare.ShareUserName = $scope.payUserShare.ShareUserName.replace(/.$/g, '');
         if ($scope.outlay.RowID == '') {
             $scope.saveOutlay();
         } else {
@@ -155,12 +143,12 @@
 
     $scope.editUser = function () {
         $scope.outlay.PayDate = $('.datepicker').val();
-        dataService.updateItem("Outlay/PutOutlay", { payUserShare: $scope.payUserShare, outlay: $scope.outlay })
+        dataService.updateItem("Outlay/EditOutlay", { payUserShare: $scope.payUserShare, outlay: $scope.outlay })
         .success(function (data) {
-            $scope.load();
+            $scope.getItems($scope.itemsPerPage, $scope.currentPage);
             $("#addOrEditModal").modal('hide');
         })
-        .error(function () {
+        .error(function (data) {
             alert("修改失败");
         });
     };
@@ -185,6 +173,7 @@
             RowID: '',
             PayMoney: '',
             PayItemID: '',
+            PayUserID:'',
             PayDate: '',
             ShareID: 0,
             Remark: '',
@@ -205,6 +194,7 @@
             RowID: $(this)[0].outlay.RowID,
             PayMoney: $(this)[0].outlay.PayMoney,
             PayItemID: $(this)[0].outlay.PayItemID,
+            PayUserID: $(this)[0].outlay.PayUserID,
             PayDate: $(this)[0].outlay.PayDate,
             ShareID: $(this)[0].outlay.ShareID,
             Remark: $(this)[0].outlay.Remark,
@@ -212,6 +202,19 @@
         };
         $scope.payUserShare.ShareUserID = $(this)[0].outlay.ShareUserID;
         $scope.payUserShare.ShareUserName = $(this)[0].outlay.ShareUserName;
+    };
+
+    $scope.deleteOutlay = function () {
+        if (confirm("是否删除此记录？") == false) {
+            return;
+        }
+        dataService.deleteById("Outlay/DeleteOutlay", $scope.outlay.RowID)
+        .success(function (data) {
+            $scope.getItems($scope.itemsPerPage, $scope.currentPage);
+        })
+        .error(function () {
+            alert("删除失败");
+        });
     };
     $scope.load();
 }]);

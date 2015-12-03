@@ -2,7 +2,7 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="FlatShareModelStoreContainer" CdmEntityContainer="FlatShareEntities">
     <EntitySetMapping Name="PayItem">
-      <EntityTypeMapping TypeName="FlatShareModel.PayItem">
+      <EntityTypeMapping TypeName="IsTypeOf(FlatShareModel.PayItem)">
         <MappingFragment StoreEntitySet="PayItem">
           <ScalarProperty Name="RowID" ColumnName="RowID" />
           <ScalarProperty Name="ItemName" ColumnName="ItemName" />
@@ -14,7 +14,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserAccount">
-      <EntityTypeMapping TypeName="FlatShareModel.UserAccount">
+      <EntityTypeMapping TypeName="IsTypeOf(FlatShareModel.UserAccount)">
         <MappingFragment StoreEntitySet="UserAccount">
           <ScalarProperty Name="RowID" ColumnName="RowID" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />
@@ -29,26 +29,27 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="PayUserShare">
-      <EntityTypeMapping TypeName="FlatShareModel.PayUserShare">
+      <EntityTypeMapping TypeName="IsTypeOf(FlatShareModel.PayUserShare)">
         <MappingFragment StoreEntitySet="PayUserShare">
-          <ScalarProperty Name="ShareUserName" ColumnName="ShareUserName" />
-          <ScalarProperty Name="ShareUserID" ColumnName="ShareUserID" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="ShareUserID" ColumnName="ShareUserID" />
+          <ScalarProperty Name="ShareUserName" ColumnName="ShareUserName" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Outlay">
-      <EntityTypeMapping TypeName="FlatShareModel.Outlay">
+      <EntityTypeMapping TypeName="IsTypeOf(FlatShareModel.Outlay)">
         <MappingFragment StoreEntitySet="Outlay">
-          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
-          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
-          <ScalarProperty Name="LogicalDelete" ColumnName="LogicalDelete" />
-          <ScalarProperty Name="Remark" ColumnName="Remark" />
-          <ScalarProperty Name="ShareID" ColumnName="ShareID" />
-          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
-          <ScalarProperty Name="PayItemID" ColumnName="PayItemID" />
-          <ScalarProperty Name="PayMoney" ColumnName="PayMoney" />
+          <ScalarProperty Name="PayUserID" ColumnName="PayUserID" />
           <ScalarProperty Name="RowID" ColumnName="RowID" />
+          <ScalarProperty Name="PayMoney" ColumnName="PayMoney" />
+          <ScalarProperty Name="PayItemID" ColumnName="PayItemID" />
+          <ScalarProperty Name="PayDate" ColumnName="PayDate" />
+          <ScalarProperty Name="ShareID" ColumnName="ShareID" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="LogicalDelete" ColumnName="LogicalDelete" />
+          <ScalarProperty Name="LastUpdatedBy" ColumnName="LastUpdatedBy" />
+          <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
